@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button, FormGroup, FieldGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 
-export default class Login extends React.Component {
+export default class LoginPage extends React.Component {
     constructor (props) {
         super(props);
     }
