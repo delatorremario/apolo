@@ -11,10 +11,16 @@ export default class LoginPage extends React.Component {
         event.preventDefault();
         const email = ReactDOM.findDOMNode(this.refs.email).value.trim();
         const password = ReactDOM.findDOMNode(this.refs.password).value.trim();
-        Meteor.call('login', email, password, (err, res) => {
-            if (err) console.log(err);
-            else console.log(res);
-        });
+        Meteor.loginWithPassword(email,password, (err) => {
+            if(err){
+                console.log(err)
+                alert('ERROR login: ' + err.message);
+            }
+            else {
+                //alert('Welcome ' + email);
+                FlowRouter.go('/')
+            }
+        })
     }
 
     render(){
@@ -22,11 +28,11 @@ export default class LoginPage extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit.bind(this)}>
             <div className="input-group" >
-              <input type="email" className="form-control" placeholder="Ingrese email" />
+              <input ref="email" type="email" className="form-control" placeholder="Ingrese email" />
             </div>
 
               <div className="input-group" >
-                  <input type="password" className="form-control" placeholder="Ingrese contraseña" />
+                  <input ref="password" type="password" className="form-control" placeholder="Ingrese contraseña" />
               </div>
               <div className="input-group" >
                   <input type="submit" className="btn btn-info" value="Login"  />
